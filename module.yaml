@@ -1,0 +1,17 @@
+notests *default:
+  build:
+    target: Vostok.ServiceDiscovery.Telemetry.sln
+    configuration: NoTests
+    tool:
+      name: dotnet
+
+  install:
+    - Vostok.ServiceDiscovery.Telemetry/bin/Release/netstandard2.0/Vostok.ServiceDiscovery.Telemetry.dll
+
+  deps:
+    - vostok.devtools
+
+full-build > notests:
+  build:
+    target: Vostok.ServiceDiscovery.Telemetry.sln
+    configuration: Release
