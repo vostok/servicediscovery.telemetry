@@ -13,29 +13,29 @@ namespace Vostok.ServiceDiscovery.Telemetry.Event
         public string Environment { get; }
         [NotNull]
         public string Replica { get; }
-        
+
         public DateTimeOffset Timestamp { get; }
         public ServiceDiscoveryEventKind ServiceDiscoveryEventKind { get; }
-        
+
         [NotNull]
-        public Dictionary<string, string> Properties { get; }
+        public IReadOnlyDictionary<string, string> Properties { get; }
 
         public ServiceDiscoveryEvent(
             [NotNull] string application,
             [NotNull] string replica,
+            [NotNull] string environment,
             ServiceDiscoveryEventKind eventKind,
-            [NotNull] string environment = "default",
-            [CanBeNull] DateTimeOffset? timestamp = null,
-            [CanBeNull] Dictionary<string, string> properties = null)
+            DateTimeOffset timestamp,
+            [NotNull] Dictionary<string, string> properties)
         {
-            Application = application;
-            Replica = replica;
-            Environment = environment;
+            Application = application ?? throw new ArgumentNullException(nameof(application));
+            Replica = replica ?? throw new ArgumentNullException(nameof(replica));
+            Environment = environment ?? throw new ArgumentNullException(nameof(environment));
 
             ServiceDiscoveryEventKind = eventKind;
-            
-            Timestamp = timestamp ?? DateTimeOffset.UtcNow;
-            Properties = properties ?? new Dictionary<string, string>();
+
+            Timestamp = timestamp;
+            Properties = properties;
         }
     }
 }
