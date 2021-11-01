@@ -26,7 +26,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.Event
             [NotNull] string environment,
             ServiceDiscoveryEventKind eventKind,
             DateTimeOffset timestamp,
-            [NotNull] Dictionary<string, string> properties)
+            [NotNull] IReadOnlyDictionary<string, string> properties)
         {
             Application = application ?? throw new ArgumentNullException(nameof(application));
             Replica = replica ?? throw new ArgumentNullException(nameof(replica));
@@ -35,7 +35,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.Event
             ServiceDiscoveryEventKind = eventKind;
 
             Timestamp = timestamp;
-            Properties = properties;
+            Properties = properties ?? throw new ArgumentNullException(nameof(properties));
         }
     }
 }
