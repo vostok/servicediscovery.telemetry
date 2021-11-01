@@ -1,6 +1,6 @@
 # Vostok.ServiceDiscovery.Telemetry
 
-[![Build status](https://ci.appveyor.com/api/projects/status/github/vostok/servicediscovery.telemetry?svg=true&branch=master)](https://ci.appveyor.com/project/vostok/servicediscovery.telemetry/branch/master)
+[![Build & Test](https://github.com/vostok/servicediscovery.telemetry/actions/workflows/ci.yml/badge.svg)](https://github.com/vostok/servicediscovery.telemetry/actions/workflows/ci.yml)
 [![NuGet](https://img.shields.io/nuget/v/Vostok.ServiceDiscovery.Telemetry.svg)](https://www.nuget.org/packages/Vostok.ServiceDiscovery.Telemetry)
 
 
