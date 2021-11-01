@@ -6,11 +6,15 @@ namespace Vostok.ServiceDiscovery.Telemetry.EventDescription
     public static class ServiceDiscoveryEventDescriptionExtensions
     {
         [NotNull]
-        public static ServiceDiscoveryEventDescription SetDescription(this ServiceDiscoveryEventDescription serviceDiscoveryEventsBuilder, [NotNull] string description) =>
-            serviceDiscoveryEventsBuilder.AddProperties((ServiceDiscoveryEventKeys.EventDescription, description));
+        public static ServiceDiscoveryEventDescription SetDescription(this ServiceDiscoveryEventDescription serviceDiscoveryEventDescription, [NotNull] string description) =>
+            serviceDiscoveryEventDescription.AddProperties((ServiceDiscoveryEventKeys.EventDescription, description));
         
         [NotNull]
-        public static ServiceDiscoveryEventDescription SetUserId(this ServiceDiscoveryEventDescription serviceDiscoveryEventsBuilder, [NotNull] string userId) =>
-            serviceDiscoveryEventsBuilder.AddProperties((ServiceDiscoveryEventKeys.EventCreatorId, userId));
+        public static ServiceDiscoveryEventDescription SetUserId(this ServiceDiscoveryEventDescription serviceDiscoveryEventDescription, [NotNull] string userId) =>
+            serviceDiscoveryEventDescription.AddProperties((ServiceDiscoveryEventKeys.EventCreatorId, userId));
+
+        [NotNull]
+        public static ServiceDiscoveryEventDescription SetDependencies(this ServiceDiscoveryEventDescription serviceDiscoveryEventDescription, [NotNull] string dependencies) =>
+            serviceDiscoveryEventDescription.AddProperties((ServiceDiscoveryEventKeys.Dependencies, dependencies));
     }
 }

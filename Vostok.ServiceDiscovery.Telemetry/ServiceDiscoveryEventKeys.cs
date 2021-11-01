@@ -7,5 +7,7 @@ namespace Vostok.ServiceDiscovery.Telemetry
     {
         public const string EventCreatorId = "userId";
         public const string EventDescription = "description";
+        
+        public const string Dependencies = "dependencies";
     }
 }
