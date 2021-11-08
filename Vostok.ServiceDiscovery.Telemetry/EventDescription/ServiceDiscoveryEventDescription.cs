@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using JetBrains.Annotations;
 using Vostok.ServiceDiscovery.Telemetry.Event;
 
@@ -28,24 +27,40 @@ namespace Vostok.ServiceDiscovery.Telemetry.EventDescription
         #region Setters
 
         [NotNull]
-        public ServiceDiscoveryEventDescription SetApplication([NotNull] string application) =>
-            throw new NotImplementedException();
+        public ServiceDiscoveryEventDescription SetApplication([NotNull] string application)
+        {
+            Application = application;
+            return this;
+        }
 
         [NotNull]
-        public ServiceDiscoveryEventDescription SetEnvironment([NotNull] string environment) =>
-            throw new NotImplementedException();
+        public ServiceDiscoveryEventDescription SetEnvironment([NotNull] string environment)
+        {
+            Environment = environment;
+            return this;
+        }
 
         [NotNull]
-        public ServiceDiscoveryEventDescription SetEventKind(ServiceDiscoveryEventKind eventKind) =>
-            throw new NotImplementedException();
+        public ServiceDiscoveryEventDescription SetEventKind(ServiceDiscoveryEventKind eventKind)
+        {
+            EventKind = eventKind;
+            return this;
+        }
 
         [NotNull]
-        public ServiceDiscoveryEventDescription AddProperties(params (string key, string value)[] properties) =>
-            throw new NotImplementedException();
+        public ServiceDiscoveryEventDescription AddProperties(params (string key, string value)[] properties)
+        {
+            foreach (var (key, value) in properties)
+                this.properties[key] = value;
+            return this;
+        }
 
         [NotNull]
-        public ServiceDiscoveryEventDescription AddReplicas(params string[] replicas) =>
-            throw new NotImplementedException();
+        public ServiceDiscoveryEventDescription AddReplicas(params string[] replicasUri)
+        {
+            replicas.AddRange(replicasUri);
+            return this;
+        }
 
         #endregion
     }
