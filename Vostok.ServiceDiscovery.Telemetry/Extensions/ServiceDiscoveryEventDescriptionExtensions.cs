@@ -1,6 +1,7 @@
 ﻿using JetBrains.Annotations;
+using Vostok.ServiceDiscovery.Telemetry.EventDescription;
 
-namespace Vostok.ServiceDiscovery.Telemetry.EventDescription
+namespace Vostok.ServiceDiscovery.Telemetry.Extensions
 {
     [PublicAPI]
     public static class ServiceDiscoveryEventDescriptionExtensions
