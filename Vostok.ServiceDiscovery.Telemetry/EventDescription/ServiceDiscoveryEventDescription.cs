@@ -15,7 +15,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.EventDescription
         public string Environment { get; set; }
 
         [NotNull]
-        public IReadOnlyList<Uri> Replicas => replicas;
+        public IReadOnlyList<string> Replicas => replicas;
 
         public ServiceDiscoveryEventKind EventKind { get; set; }
 
@@ -23,7 +23,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.EventDescription
         public IReadOnlyDictionary<string, string> Properties => properties;
 
         private readonly Dictionary<string, string> properties = new Dictionary<string, string>();
-        private readonly List<Uri> replicas = new List<Uri>();
+        private readonly List<string> replicas = new List<string>();
 
         #region Setters
 
@@ -44,7 +44,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.EventDescription
             throw new NotImplementedException();
 
         [NotNull]
-        public ServiceDiscoveryEventDescription AddReplicas(params Uri[] replicas) =>
+        public ServiceDiscoveryEventDescription AddReplicas(params string[] replicas) =>
             throw new NotImplementedException();
 
         #endregion
