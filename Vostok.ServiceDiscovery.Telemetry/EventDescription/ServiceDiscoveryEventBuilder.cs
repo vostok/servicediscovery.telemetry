@@ -16,10 +16,10 @@ namespace Vostok.ServiceDiscovery.Telemetry.EventDescription
                 return Enumerable.Empty<ServiceDiscoveryEvent>();
 
             return serviceDiscoveryEventDescription.Replicas.Select(replica => new ServiceDiscoveryEvent(
+                serviceDiscoveryEventDescription.EventKind,
                 serviceDiscoveryEventDescription.Application,
                 replica,
                 serviceDiscoveryEventDescription.Environment,
-                serviceDiscoveryEventDescription.EventKind,
                 DateTimeOffset.UtcNow,
                 serviceDiscoveryEventDescription.Properties));
         }
