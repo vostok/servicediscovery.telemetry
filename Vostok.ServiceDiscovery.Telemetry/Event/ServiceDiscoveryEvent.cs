@@ -21,10 +21,10 @@ namespace Vostok.ServiceDiscovery.Telemetry.Event
         public IReadOnlyDictionary<string, string> Properties { get; }
 
         public ServiceDiscoveryEvent(
+            ServiceDiscoveryEventKind eventKind,
             [NotNull] string application,
             [NotNull] string replica,
             [NotNull] string environment,
-            ServiceDiscoveryEventKind eventKind,
             DateTimeOffset timestamp,
             [NotNull] IReadOnlyDictionary<string, string> properties)
         {

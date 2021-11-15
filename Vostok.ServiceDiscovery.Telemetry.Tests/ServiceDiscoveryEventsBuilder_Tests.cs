@@ -24,13 +24,13 @@ namespace Vostok.ServiceDiscovery.Telemetry.Tests
                 .SetUserId("user")
                 .SetDescription("description")
                 .SetDependencies("dependencies");
-            var expected = new ServiceDiscoveryEvent(Application,
+            var expected = new ServiceDiscoveryEvent(ServiceDiscoveryEventKind.ReplicaStart,
+                Application,
                 Replica,
                 Environment,
-                ServiceDiscoveryEventKind.ReplicaStart,
                 DateTimeOffset.UtcNow,
                 new Dictionary<string, string>
-                    {{ServiceDiscoveryEventKeys.EventCreatorId, "user"}, {ServiceDiscoveryEventKeys.EventDescription, "description"}, {ServiceDiscoveryEventKeys.Dependencies, "dependencies"}});
+                    {{ServiceDiscoveryEventKeys.CreatorId, "user"}, {ServiceDiscoveryEventKeys.Description, "description"}, {ServiceDiscoveryEventKeys.Dependencies, "dependencies"}});
 
             var events = ServiceDiscoveryEventsBuilder.FromDescription(description);
             var serviceDiscoveryEvent = events.Single();
@@ -43,7 +43,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.Tests
         {
             var replicas = Enumerable.Range(0, 10).Select(i => $"{Replica}:{i}").ToArray();
             var expected = replicas.Select(replica =>
-                new ServiceDiscoveryEvent(Application, replica, Environment, ServiceDiscoveryEventKind.ReplicaStart, DateTimeOffset.UtcNow, new Dictionary<string, string>()));
+                new ServiceDiscoveryEvent(ServiceDiscoveryEventKind.ReplicaStart, Application, replica, Environment, DateTimeOffset.UtcNow, new Dictionary<string, string>()));
 
             var description = SetupDescription(new ServiceDiscoveryEventDescription())
                 .AddReplicas(replicas);
@@ -52,7 +52,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.Tests
 
             events.Should().BeEquivalentTo(expected, options => options.Excluding(sdEvent => sdEvent.Timestamp));
         }
-        
+
         [Test]
         public void Should_return_empty_for_null_application()
         {
