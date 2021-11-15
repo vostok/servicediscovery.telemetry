@@ -48,10 +48,9 @@ namespace Vostok.ServiceDiscovery.Telemetry.EventDescription
         }
 
         [NotNull]
-        public ServiceDiscoveryEventDescription AddProperties(params (string key, string value)[] properties)
+        public ServiceDiscoveryEventDescription AddProperties([NotNull] string key, [NotNull] string value)
         {
-            foreach (var (key, value) in properties)
-                this.properties[key] = value;
+            properties[key] = value;
             return this;
         }
 
