@@ -66,7 +66,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.Tests
             events.Should().BeEmpty();
         }
 
-        private static ServiceDiscoveryEventDescription SetupDescription(ServiceDiscoveryEventDescription description)
+        private static IServiceDiscoveryEventDescription SetupDescription(IServiceDiscoveryEventDescription description)
         {
             return description.SetApplication(Application)
                 .SetEnvironment(Environment)
