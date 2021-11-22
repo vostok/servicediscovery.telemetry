@@ -1,5 +1,6 @@
 notests *default:
   deps:
+    - vostok.context
     - vostok.devtools
     
   build:

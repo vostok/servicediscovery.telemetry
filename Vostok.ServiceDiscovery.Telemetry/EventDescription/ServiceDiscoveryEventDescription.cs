@@ -1,63 +1,78 @@
-﻿using System.Collections.Generic;
-using JetBrains.Annotations;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Vostok.ServiceDiscovery.Telemetry.Event;
 
 namespace Vostok.ServiceDiscovery.Telemetry.EventDescription
 {
-    [PublicAPI]
-    public class ServiceDiscoveryEventDescription
+    internal class ServiceDiscoveryEventDescription : IServiceDiscoveryEventDescription
     {
-        [CanBeNull]
         public string Application { get; set; }
-
-        [CanBeNull]
         public string Environment { get; set; }
-
-        [NotNull]
         public IReadOnlyList<string> Replicas => replicas;
-
         public ServiceDiscoveryEventKind EventKind { get; set; }
-
-        [NotNull]
         public IReadOnlyDictionary<string, string> Properties => properties;
 
-        private readonly Dictionary<string, string> properties = new Dictionary<string, string>();
-        private readonly List<string> replicas = new List<string>();
+        private readonly Dictionary<string, string> properties;
+        private readonly List<string> replicas;
+        private IDisposable descriptionScope;
+
+        public ServiceDiscoveryEventDescription()
+        {
+            replicas = new List<string>();
+            properties = new Dictionary<string, string>();
+        }
+
+        public ServiceDiscoveryEventDescription(IServiceDiscoveryEventDescription eventDescription)
+        {
+            Application = eventDescription.Application;
+            Environment = eventDescription.Environment;
+            EventKind = eventDescription.EventKind;
+
+            replicas = new List<string>(eventDescription.Replicas);
+            properties = eventDescription.Properties.ToDictionary(pair => pair.Key, pair => pair.Value);
+        }
+
+        public void Dispose()
+        {
+            descriptionScope?.Dispose();
+        }
 
         #region Setters
 
-        [NotNull]
-        public ServiceDiscoveryEventDescription SetApplication([NotNull] string application)
+        public IServiceDiscoveryEventDescription SetApplication(string application)
         {
             Application = application;
             return this;
         }
 
-        [NotNull]
-        public ServiceDiscoveryEventDescription SetEnvironment([NotNull] string environment)
+        public IServiceDiscoveryEventDescription SetEnvironment(string environment)
         {
             Environment = environment;
             return this;
         }
 
-        [NotNull]
-        public ServiceDiscoveryEventDescription SetEventKind(ServiceDiscoveryEventKind eventKind)
+        public IServiceDiscoveryEventDescription SetEventKind(ServiceDiscoveryEventKind eventKind)
         {
             EventKind = eventKind;
             return this;
         }
 
-        [NotNull]
-        public ServiceDiscoveryEventDescription AddProperties([NotNull] string key, [NotNull] string value)
+        public IServiceDiscoveryEventDescription AddProperty(string key, string value)
         {
             properties[key] = value;
             return this;
         }
 
-        [NotNull]
-        public ServiceDiscoveryEventDescription AddReplicas(params string[] replicasUri)
+        public IServiceDiscoveryEventDescription AddReplicas(params string[] replicasUri)
         {
             replicas.AddRange(replicasUri);
+            return this;
+        }
+
+        public IServiceDiscoveryEventDescription SetDescriptionScope(IDisposable scope)
+        {
+            descriptionScope = scope;
             return this;
         }
 
