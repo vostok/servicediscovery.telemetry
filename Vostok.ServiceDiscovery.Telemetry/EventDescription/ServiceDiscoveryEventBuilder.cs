@@ -9,7 +9,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.EventDescription
     public static class ServiceDiscoveryEventsBuilder
     {
         [NotNull]
-        public static IEnumerable<ServiceDiscoveryEvent> FromDescription([NotNull] ServiceDiscoveryEventDescription serviceDiscoveryEventDescription) =>
+        public static IEnumerable<ServiceDiscoveryEvent> FromDescription([NotNull] IServiceDiscoveryEventDescription serviceDiscoveryEventDescription) =>
             throw new NotImplementedException();
     }
 }
