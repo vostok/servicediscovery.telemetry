@@ -1,5 +1,5 @@
-﻿using System.Threading;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
+using Vostok.Context;
 using Vostok.ServiceDiscovery.Telemetry.EventDescription;
 
 namespace Vostok.ServiceDiscovery.Telemetry
@@ -7,28 +7,32 @@ namespace Vostok.ServiceDiscovery.Telemetry
     [PublicAPI]
     public static class ServiceDiscoveryEventDescriptionContext
     {
-        private static readonly AsyncLocal<ServiceDiscoveryEventDescription> DescriptionContainer = new AsyncLocal<ServiceDiscoveryEventDescription>();
-
         [CanBeNull]
-        public static ServiceDiscoveryEventDescription CurrentDescription
+        public static IServiceDiscoveryEventDescription CurrentDescription
         {
-            get => DescriptionContainer.Value;
-            private set => DescriptionContainer.Value = value;
+            get => FlowingContext.Globals.Get<IServiceDiscoveryEventDescription>();
+            set => FlowingContext.Globals.Set(value);
         }
 
         [NotNull]
-        public static ServiceDiscoveryEventDescription Create()
+        public static IServiceDiscoveryEventDescription Create()
         {
-            CurrentDescription = new ServiceDiscoveryEventDescription();
-            return CurrentDescription;
+            return SetScopedDescription(new ServiceDiscoveryEventDescription());
         }
 
         [NotNull]
-        public static ServiceDiscoveryEventDescription GetOrCreate()
+        public static IServiceDiscoveryEventDescription Continue()
         {
-            var current = CurrentDescription ?? new ServiceDiscoveryEventDescription();
-            CurrentDescription = current;
-            return CurrentDescription;
+            return SetScopedDescription(CurrentDescription != null
+                ? new ServiceDiscoveryEventDescription(CurrentDescription)
+                : new ServiceDiscoveryEventDescription());
+        }
+
+        private static IServiceDiscoveryEventDescription SetScopedDescription(ServiceDiscoveryEventDescription eventDescription)
+        {
+            var scope = FlowingContext.Globals.Use(eventDescription);
+            eventDescription.SetDescriptionScope(scope);
+            return eventDescription;
         }
     }
 }
