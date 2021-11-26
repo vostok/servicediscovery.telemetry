@@ -30,7 +30,7 @@ namespace Vostok.ServiceDiscovery.Telemetry
 
         private static IServiceDiscoveryEventDescription SetScopedDescription(ServiceDiscoveryEventDescription eventDescription)
         {
-            var scope = FlowingContext.Globals.Use(eventDescription);
+            var scope = FlowingContext.Globals.Use<IServiceDiscoveryEventDescription>(eventDescription);
             eventDescription.SetDescriptionScope(scope);
             return eventDescription;
         }
