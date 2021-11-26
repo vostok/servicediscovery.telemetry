@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Vostok.ServiceDiscovery.Telemetry.Event;
@@ -40,23 +40,41 @@ namespace Vostok.ServiceDiscovery.Telemetry.EventDescription
 
         #region Setters
 
-        public IServiceDiscoveryEventDescription SetApplication(string application) =>
-            throw new NotImplementedException();
+        public IServiceDiscoveryEventDescription SetApplication(string application)
+        {
+            Application = application;
+            return this;
+        }
 
-        public IServiceDiscoveryEventDescription SetEnvironment(string environment) =>
-            throw new NotImplementedException();
+        public IServiceDiscoveryEventDescription SetEnvironment(string environment)
+        {
+            Environment = environment;
+            return this;
+        }
 
-        public IServiceDiscoveryEventDescription SetEventKind(ServiceDiscoveryEventKind eventKind) =>
-            throw new NotImplementedException();
+        public IServiceDiscoveryEventDescription SetEventKind(ServiceDiscoveryEventKind eventKind)
+        {
+            EventKind = eventKind;
+            return this;
+        }
 
-        public IServiceDiscoveryEventDescription AddProperty(string key, string value) =>
-            throw new NotImplementedException();
+        public IServiceDiscoveryEventDescription AddProperty(string key, string value)
+        {
+            properties[key] = value;
+            return this;
+        }
 
-        public IServiceDiscoveryEventDescription AddReplicas(params string[] replicas) =>
-            throw new NotImplementedException();
+        public IServiceDiscoveryEventDescription AddReplicas(params string[] replicasUri)
+        {
+            replicas.AddRange(replicasUri);
+            return this;
+        }
 
-        public IServiceDiscoveryEventDescription SetDescriptionScope(IDisposable scope) =>
-            throw new NotImplementedException();
+        public IServiceDiscoveryEventDescription SetDescriptionScope(IDisposable scope)
+        {
+            descriptionScope = scope;
+            return this;
+        }
 
         #endregion
     }
