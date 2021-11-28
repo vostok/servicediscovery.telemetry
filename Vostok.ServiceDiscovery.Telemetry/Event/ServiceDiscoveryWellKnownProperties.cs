@@ -1,9 +1,9 @@
 ﻿using JetBrains.Annotations;
 
-namespace Vostok.ServiceDiscovery.Telemetry
+namespace Vostok.ServiceDiscovery.Telemetry.Event
 {
     [PublicAPI]
-    public static class ServiceDiscoveryEventKeys
+    public static class ServiceDiscoveryWellKnownProperties
     {
         public const string CreatorId = "userId";
         public const string Description = "description";
