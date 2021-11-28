@@ -24,13 +24,13 @@ namespace Vostok.ServiceDiscovery.Telemetry.Tests
                 .SetUserId("user")
                 .SetDescription("description")
                 .SetDependencies("dependencies");
-            var expected = new ServiceDiscoveryEvent(ServiceDiscoveryEventKind.ReplicaStart,
+            var expected = new ServiceDiscoveryEvent(ServiceDiscoveryEventKind.ReplicaStarted,
+                Environment,
                 Application,
                 Replica,
-                Environment,
                 DateTimeOffset.UtcNow,
                 new Dictionary<string, string>
-                    {{ServiceDiscoveryEventKeys.CreatorId, "user"}, {ServiceDiscoveryEventKeys.Description, "description"}, {ServiceDiscoveryEventKeys.Dependencies, "dependencies"}});
+                    {{ServiceDiscoveryWellKnownProperties.CreatorId, "user"}, {ServiceDiscoveryWellKnownProperties.Description, "description"}, {ServiceDiscoveryWellKnownProperties.Dependencies, "dependencies"}});
 
             var events = ServiceDiscoveryEventsBuilder.FromDescription(description);
             var serviceDiscoveryEvent = events.Single();
@@ -43,7 +43,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.Tests
         {
             var replicas = Enumerable.Range(0, 10).Select(i => $"{Replica}:{i}").ToArray();
             var expected = replicas.Select(replica =>
-                new ServiceDiscoveryEvent(ServiceDiscoveryEventKind.ReplicaStart, Application, replica, Environment, DateTimeOffset.UtcNow, new Dictionary<string, string>()));
+                new ServiceDiscoveryEvent(ServiceDiscoveryEventKind.ReplicaStarted, Environment, Application, replica, DateTimeOffset.UtcNow, new Dictionary<string, string>()));
 
             var description = SetupDescription(new ServiceDiscoveryEventDescription())
                 .AddReplicas(replicas);
@@ -70,7 +70,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.Tests
         {
             return description.SetApplication(Application)
                 .SetEnvironment(Environment)
-                .SetEventKind(ServiceDiscoveryEventKind.ReplicaStart);
+                .SetEventKind(ServiceDiscoveryEventKind.ReplicaStarted);
         }
     }
 }

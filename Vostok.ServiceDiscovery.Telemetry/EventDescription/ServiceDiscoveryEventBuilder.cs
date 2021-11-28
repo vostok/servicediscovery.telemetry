@@ -17,9 +17,9 @@ namespace Vostok.ServiceDiscovery.Telemetry.EventDescription
 
             return serviceDiscoveryEventDescription.Replicas.Select(replica => new ServiceDiscoveryEvent(
                 serviceDiscoveryEventDescription.EventKind,
+                serviceDiscoveryEventDescription.Environment,
                 serviceDiscoveryEventDescription.Application,
                 replica,
-                serviceDiscoveryEventDescription.Environment,
                 DateTimeOffset.UtcNow,
                 serviceDiscoveryEventDescription.Properties));
         }
