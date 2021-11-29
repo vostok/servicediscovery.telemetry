@@ -23,7 +23,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.EventDescription
             properties = new Dictionary<string, string>();
         }
 
-        public ServiceDiscoveryEventDescription(IServiceDiscoveryEventDescription eventDescription)
+        public ServiceDiscoveryEventDescription Clone()
         {
             Application = eventDescription.Application;
             Environment = eventDescription.Environment;
