@@ -5,7 +5,7 @@ using Vostok.ServiceDiscovery.Telemetry.EventDescription;
 namespace Vostok.ServiceDiscovery.Telemetry
 {
     [PublicAPI]
-    public static class ServiceDiscoveryEventDescriptionContext
+    public static class ServiceDiscoveryEventsContext
     {
         [CanBeNull]
         public static IServiceDiscoveryEventDescription CurrentDescription
