@@ -32,7 +32,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.EventDescription
         IServiceDiscoveryEventDescription SetEventKind(ServiceDiscoveryEventKind eventKind);
 
         [NotNull]
-        IServiceDiscoveryEventDescription AddProperty([NotNull] string key, [NotNull] string value);
+        IServiceDiscoveryEventDescription SetProperty([NotNull] string key, [NotNull] string value);
 
         [NotNull]
         IServiceDiscoveryEventDescription AddReplicas(params string[] replicas);
