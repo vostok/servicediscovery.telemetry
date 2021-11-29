@@ -6,6 +6,6 @@ namespace Vostok.ServiceDiscovery.Telemetry.EventSender
     [PublicAPI]
     public interface IServiceDiscoveryEventSender
     {
-        void Send([NotNull] ServiceDiscoveryEvent serviceDiscoveryEvent);
+        void Send([NotNull] ServiceDiscoveryEvent event);
     }
 }
