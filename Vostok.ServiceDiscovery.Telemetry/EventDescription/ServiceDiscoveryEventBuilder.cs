@@ -20,7 +20,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.EventDescription
                 serviceDiscoveryEventDescription.Environment,
                 serviceDiscoveryEventDescription.Application,
                 replica,
-                DateTimeOffset.UtcNow,
+                DateTimeOffset.Now,
                 serviceDiscoveryEventDescription.Properties));
         }
     }
