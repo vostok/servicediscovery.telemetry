@@ -4,6 +4,9 @@ using Vostok.ServiceDiscovery.Telemetry.Event;
 
 namespace Vostok.ServiceDiscovery.Telemetry.EventContext
 {
+    /// <summary>
+    /// A trivial implementation of <see cref="IServiceDiscoveryEventContext"/> that simply does nothing.
+    /// </summary>
     [PublicAPI]
     public class DevNullServiceDiscoveryEventContext : IServiceDiscoveryEventContext
     {
