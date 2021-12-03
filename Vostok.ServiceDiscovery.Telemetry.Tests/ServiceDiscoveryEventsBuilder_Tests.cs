@@ -4,8 +4,7 @@ using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 using Vostok.ServiceDiscovery.Telemetry.Event;
-using Vostok.ServiceDiscovery.Telemetry.EventDescription;
-using Vostok.ServiceDiscovery.Telemetry.Extensions;
+using Vostok.ServiceDiscovery.Telemetry.EventsBuilder;
 
 namespace Vostok.ServiceDiscovery.Telemetry.Tests
 {
@@ -15,27 +14,30 @@ namespace Vostok.ServiceDiscovery.Telemetry.Tests
         private const string Environment = "default";
         private const string Application = "vostok";
         private const string Replica = "https://github.com/vostok";
+        private readonly DateTimeOffset timestamp = DateTimeOffset.Now;
+        private ServiceDiscoveryEventsBuilder eventsBuilder;
+
+        [SetUp]
+        public void SetUp() =>
+            eventsBuilder = new ServiceDiscoveryEventsBuilder();
 
         [Test]
-        public void Should_correctly_build_from_event_description()
+        public void Should_correctly_build_event()
         {
-            var description = SetupDescription(new ServiceDiscoveryEventDescription())
-                .AddReplicas(Replica)
-                .SetUserId("user")
-                .SetDescription("description")
-                .SetDependencies("dependencies");
+            SetupBuilder(eventsBuilder).AddReplicas(Replica).SetUserId("user").SetDescription("description").SetDependencies("dependencies").SetTimestamp(timestamp);
             var expected = new ServiceDiscoveryEvent(ServiceDiscoveryEventKind.ReplicaStarted,
                 Environment,
                 Application,
                 Replica,
-                DateTimeOffset.UtcNow,
+                timestamp,
                 new Dictionary<string, string>
-                    {{ServiceDiscoveryWellKnownProperties.CreatorId, "user"}, {ServiceDiscoveryWellKnownProperties.Description, "description"}, {ServiceDiscoveryWellKnownProperties.Dependencies, "dependencies"}});
+                {
+                    {ServiceDiscoveryWellKnownProperties.UserId, "user"},
+                    {ServiceDiscoveryWellKnownProperties.Description, "description"},
+                    {ServiceDiscoveryWellKnownProperties.Dependencies, "dependencies"}
+                });
 
-            var events = ServiceDiscoveryEventsBuilder.FromDescription(description);
-            var serviceDiscoveryEvent = events.Single();
-
-            serviceDiscoveryEvent.Should().BeEquivalentTo(expected, options => options.Excluding(sdEvent => sdEvent.Timestamp));
+            eventsBuilder.BuildEvents().Single().Should().BeEquivalentTo(expected);
         }
 
         [Test]
@@ -43,30 +45,20 @@ namespace Vostok.ServiceDiscovery.Telemetry.Tests
         {
             var replicas = Enumerable.Range(0, 10).Select(i => $"{Replica}:{i}").ToArray();
             var expected = replicas.Select(replica =>
-                new ServiceDiscoveryEvent(ServiceDiscoveryEventKind.ReplicaStarted, Environment, Application, replica, DateTimeOffset.UtcNow, new Dictionary<string, string>()));
+                new ServiceDiscoveryEvent(ServiceDiscoveryEventKind.ReplicaStarted, Environment, Application, replica, timestamp, new Dictionary<string, string>()));
 
-            var description = SetupDescription(new ServiceDiscoveryEventDescription())
-                .AddReplicas(replicas);
+            SetupBuilder(eventsBuilder).SetTimestamp(timestamp).AddReplicas(replicas);
 
-            var events = ServiceDiscoveryEventsBuilder.FromDescription(description);
-
-            events.Should().BeEquivalentTo(expected, options => options.Excluding(sdEvent => sdEvent.Timestamp));
+            eventsBuilder.BuildEvents().Should().BeEquivalentTo(expected);
         }
 
         [Test]
-        public void Should_return_empty_for_null_application()
+        public void Should_not_build_events_with_non_configured_builder()
         {
-            var replicas = Enumerable.Range(0, 10).Select(i => $"{Replica}:{i}").ToArray();
-
-            var description = new ServiceDiscoveryEventDescription()
-                .AddReplicas(replicas);
-
-            var events = ServiceDiscoveryEventsBuilder.FromDescription(description);
-
-            events.Should().BeEmpty();
+            eventsBuilder.BuildEvents().Should().BeEmpty();
         }
 
-        private static IServiceDiscoveryEventDescription SetupDescription(IServiceDiscoveryEventDescription description)
+        private static IServiceDiscoveryEventsBuilder SetupBuilder(IServiceDiscoveryEventsBuilder description)
         {
             return description.SetApplication(Application)
                 .SetEnvironment(Environment)
