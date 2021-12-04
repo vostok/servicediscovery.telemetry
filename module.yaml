@@ -13,6 +13,10 @@ notests *default:
     - Vostok.ServiceDiscovery.Telemetry/bin/Release/netstandard2.0/Vostok.ServiceDiscovery.Telemetry.dll
 
 full-build > notests:
+  deps:
+    - -vostok.devtools
+    - vostok.devtools@with-net6.0
+
   build:
     target: Vostok.ServiceDiscovery.Telemetry.sln
     configuration: Release
