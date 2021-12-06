@@ -10,7 +10,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.Event
     /// <para>Each event contains the kind of event <see cref="ServiceDiscoveryEventKind"/>,
     /// time <see cref="Timestamp"/>
     /// and information about the replica with which the event is associated (<see cref="Environment"/>, <see cref="Application"/>, <see cref="Replica"/>).</para>
-    /// <para>Events may also contain auxiliary information in <see cref="Properties"/> see <see cref="ServiceDiscoveryWellKnownProperties"/>.</para>
+    /// <para>Events may also contain auxiliary information in <see cref="Properties"/> see <see cref="ServiceDiscoveryEventWellKnownProperties"/>.</para>
     /// <para><see cref="ServiceDiscoveryEvent"/> instances are immutable.</para>
     /// <para><see cref="ServiceDiscoveryEvent"/>s are not meant to be instantiated manually.
     /// It's recommended to use setup <see cref="IServiceDiscoveryEventsBuilder"/> from <see cref="ServiceDiscoveryEventsContextToken"/>.</para>

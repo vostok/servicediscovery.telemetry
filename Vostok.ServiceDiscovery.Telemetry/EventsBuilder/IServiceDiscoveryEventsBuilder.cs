@@ -50,12 +50,12 @@ namespace Vostok.ServiceDiscovery.Telemetry.EventsBuilder
         /// <para>Existing <see cref="ServiceDiscoveryEvent.Kind"/> are overwritten with provided values.</para>
         /// </summary>
         [NotNull]
-        IServiceDiscoveryEventsBuilder SetEventKind(ServiceDiscoveryEventKind eventKind);
+        IServiceDiscoveryEventsBuilder SetKind(ServiceDiscoveryEventKind kind);
 
         /// <summary>
         /// <para>Add the property with given <paramref name="key"/> and <paramref name="value"/> in constructed event's <see cref="ServiceDiscoveryEvent.Properties"/>.</para>
         /// <para>Existing property are overwritten with provided values.</para>
-        /// <para>For add <see cref="ServiceDiscoveryWellKnownProperties">well-known property</see> use <see cref="IServiceDiscoveryEventsBuilderExtensions"/>.</para>
+        /// <para>For add <see cref="ServiceDiscoveryEventWellKnownProperties">well-known property</see> use <see cref="IServiceDiscoveryEventsBuilderExtensions"/>.</para>
         /// </summary>
         [NotNull]
         IServiceDiscoveryEventsBuilder SetProperty([NotNull] string key, [NotNull] string value);

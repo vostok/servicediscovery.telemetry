@@ -75,7 +75,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.Tests
             return description.SetApplication(Application)
                 .SetEnvironment(Environment)
                 .AddReplicas(Replica)
-                .SetEventKind(ServiceDiscoveryEventKind.ReplicaStarted);
+                .SetKind(ServiceDiscoveryEventKind.ReplicaStarted);
         }
     }
 }

@@ -3,7 +3,7 @@
 namespace Vostok.ServiceDiscovery.Telemetry.Event
 {
     [PublicAPI]
-    public static class ServiceDiscoveryWellKnownProperties
+    public static class ServiceDiscoveryEventWellKnownProperties
     {
         public const string UserId = "userId";
         public const string Description = "description";

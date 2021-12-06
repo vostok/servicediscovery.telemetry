@@ -32,9 +32,9 @@ namespace Vostok.ServiceDiscovery.Telemetry.Tests
                 timestamp,
                 new Dictionary<string, string>
                 {
-                    {ServiceDiscoveryWellKnownProperties.UserId, "user"},
-                    {ServiceDiscoveryWellKnownProperties.Description, "description"},
-                    {ServiceDiscoveryWellKnownProperties.Dependencies, "dependencies"}
+                    {ServiceDiscoveryEventWellKnownProperties.UserId, "user"},
+                    {ServiceDiscoveryEventWellKnownProperties.Description, "description"},
+                    {ServiceDiscoveryEventWellKnownProperties.Dependencies, "dependencies"}
                 });
 
             eventsBuilder.BuildEvents().Single().Should().BeEquivalentTo(expected);
@@ -62,7 +62,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.Tests
         {
             return description.SetApplication(Application)
                 .SetEnvironment(Environment)
-                .SetEventKind(ServiceDiscoveryEventKind.ReplicaStarted);
+                .SetKind(ServiceDiscoveryEventKind.ReplicaStarted);
         }
     }
 }
