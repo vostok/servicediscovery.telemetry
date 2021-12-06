@@ -4,9 +4,8 @@ using FluentAssertions;
 using NUnit.Framework;
 using Vostok.Context;
 using Vostok.ServiceDiscovery.Telemetry.Event;
-using Vostok.ServiceDiscovery.Telemetry.EventContext;
 using Vostok.ServiceDiscovery.Telemetry.EventsBuilder;
-using Vostok.ServiceDiscovery.Telemetry.EventSender;
+using Vostok.ServiceDiscovery.Telemetry.EventsSender;
 
 // ReSharper disable PossibleNullReferenceException
 
@@ -18,18 +17,18 @@ namespace Vostok.ServiceDiscovery.Telemetry.Tests
         private const string Environment = "default";
         private const string Application = "vostok";
         private const string Replica = "https://github.com/vostok";
-        private readonly IServiceDiscoveryEventContext eventContext = new ServiceDiscoveryEventContext(
-            new ServiceDiscoveryEventContextConfig(new DevNullServiceDiscoveryEventSender()));
+        private readonly IServiceDiscoveryEventsContext eventContext = new ServiceDiscoveryEventsContext(
+            new ServiceDiscoveryEventsContextConfig(new DevNullServiceDiscoveryEventsSender()));
 
         [Test]
         public void Should_replace_new_builder_with_old_after_dispose()
         {
             FlowingContext.Globals.Get<ServiceDiscoveryEventsBuilder>().Should().BeNull();
 
-            using (new ServiceDiscoveryEventContextToken(builder => {}))
+            using (new ServiceDiscoveryEventsContextToken(builder => {}))
             {
                 var first = FlowingContext.Globals.Get<ServiceDiscoveryEventsBuilder>();
-                using (new ServiceDiscoveryEventContextToken(builder => {}))
+                using (new ServiceDiscoveryEventsContextToken(builder => {}))
                 {
                     var second = FlowingContext.Globals.Get<ServiceDiscoveryEventsBuilder>();
 
@@ -48,12 +47,12 @@ namespace Vostok.ServiceDiscovery.Telemetry.Tests
         {
             var nestedProperties = new Dictionary<string, string> {{"key", "value"}, {"key1", "value1"}, {"key2", "value2"}, {"key3", "value3"}};
 
-            using (new ServiceDiscoveryEventContextToken(builder => SetupBuilder(builder).SetProperty("key", "value")))
+            using (new ServiceDiscoveryEventsContextToken(builder => SetupBuilder(builder).SetProperty("key", "value")))
             {
                 var initialProperty = eventContext.CurrentEvents.Single().Properties;
-                using (new ServiceDiscoveryEventContextToken(builder => builder.SetProperty("key1", "value1")))
-                using (new ServiceDiscoveryEventContextToken(builder => builder.SetProperty("key2", "value2")))
-                using (new ServiceDiscoveryEventContextToken(builder => builder.SetProperty("key3", "value3")))
+                using (new ServiceDiscoveryEventsContextToken(builder => builder.SetProperty("key1", "value1")))
+                using (new ServiceDiscoveryEventsContextToken(builder => builder.SetProperty("key2", "value2")))
+                using (new ServiceDiscoveryEventsContextToken(builder => builder.SetProperty("key3", "value3")))
                     eventContext.CurrentEvents.Single().Properties.Should().BeEquivalentTo(nestedProperties);
 
                 eventContext.CurrentEvents.Single().Properties.Should().BeEquivalentTo(initialProperty);
@@ -67,7 +66,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.Tests
 
             FlowingContext.Globals.Get<ServiceDiscoveryEventsBuilder>().Should().BeNull();
 
-            using (new ServiceDiscoveryEventContextToken(builder => SetupBuilder(builder).SetProperty("key1", "value1").SetProperty("key2", "value2")))
+            using (new ServiceDiscoveryEventsContextToken(builder => SetupBuilder(builder).SetProperty("key1", "value1").SetProperty("key2", "value2")))
                 eventContext.CurrentEvents.Single().Properties.Should().BeEquivalentTo(expectedProperties);
         }
 
