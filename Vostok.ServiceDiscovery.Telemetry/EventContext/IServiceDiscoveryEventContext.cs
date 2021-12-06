@@ -10,7 +10,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.EventContext
     /// See <see cref="CurrentEvents"/>, <see cref="Send"/>, <see cref="TrySendFromContext"/> for details. 
     /// </summary>
     [PublicAPI]
-    public interface IServiceDiscoveryEventContext
+    public interface IServiceDiscoveryEventsContext
     {
         /// <summary>
         /// <para>Returns current state of the constructed events.</para>
