@@ -18,7 +18,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.EventsContext
         /// <para>Empty if environment, application and replicas is not set.</para>
         /// </summary>
         [NotNull]
-        IReadOnlyList<ServiceDiscoveryEvent> CurrentEvents { get; }
+        IEnumerable<ServiceDiscoveryEvent> CurrentEvents { get; }
         
         /// <summary>
         /// Sends ready-made events using <see cref="ServiceDiscoveryEventContextConfig.Sender"/>.
