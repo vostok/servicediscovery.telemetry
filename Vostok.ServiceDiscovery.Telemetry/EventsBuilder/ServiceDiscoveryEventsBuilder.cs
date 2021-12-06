@@ -79,10 +79,10 @@ namespace Vostok.ServiceDiscovery.Telemetry.EventsBuilder
             };
 
         [NotNull]
-        public List<ServiceDiscoveryEvent> BuildEvents()
+        public IEnumerable<ServiceDiscoveryEvent> BuildEvents()
         {
             if (application == null || environment == null)
-                return new List<ServiceDiscoveryEvent>();
+                return Enumerable.Empty<ServiceDiscoveryEvent>();
 
             return replicas.Select(replica => new ServiceDiscoveryEvent(
                     eventKind,
