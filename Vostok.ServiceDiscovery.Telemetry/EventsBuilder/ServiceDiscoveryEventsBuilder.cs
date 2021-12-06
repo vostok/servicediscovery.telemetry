@@ -8,7 +8,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.EventsBuilder
 {
     internal class ServiceDiscoveryEventsBuilder : IServiceDiscoveryEventsBuilder
     {
-        private ServiceDiscoveryEventKind eventKind;
+        private ServiceDiscoveryEventKind kind;
 
         private string application;
         private string environment;
@@ -43,9 +43,9 @@ namespace Vostok.ServiceDiscovery.Telemetry.EventsBuilder
             return this;
         }
 
-        public IServiceDiscoveryEventsBuilder SetEventKind(ServiceDiscoveryEventKind eventKind)
+        public IServiceDiscoveryEventsBuilder SetKind(ServiceDiscoveryEventKind kind)
         {
-            this.eventKind = eventKind;
+            this.kind = kind;
             return this;
         }
 
@@ -75,7 +75,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.EventsBuilder
             {
                 application = application,
                 environment = environment,
-                eventKind = eventKind,
+                kind = kind,
             };
 
         [NotNull]
@@ -85,7 +85,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.EventsBuilder
                 return Enumerable.Empty<ServiceDiscoveryEvent>();
 
             return replicas.Select(replica => new ServiceDiscoveryEvent(
-                    eventKind,
+                    kind,
                     environment,
                     application,
                     replica,
