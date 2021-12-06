@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
-using Vostok.ServiceDiscovery.Telemetry.EventContext;
 using Vostok.ServiceDiscovery.Telemetry.EventsBuilder;
 
 namespace Vostok.ServiceDiscovery.Telemetry.Event
@@ -14,7 +13,7 @@ namespace Vostok.ServiceDiscovery.Telemetry.Event
     /// <para>Events may also contain auxiliary information in <see cref="Properties"/> see <see cref="ServiceDiscoveryWellKnownProperties"/>.</para>
     /// <para><see cref="ServiceDiscoveryEvent"/> instances are immutable.</para>
     /// <para><see cref="ServiceDiscoveryEvent"/>s are not meant to be instantiated manually.
-    /// It's recommended to use setup <see cref="IServiceDiscoveryEventsBuilder"/> from <see cref="ServiceDiscoveryEventContextToken"/>.</para>
+    /// It's recommended to use setup <see cref="IServiceDiscoveryEventsBuilder"/> from <see cref="ServiceDiscoveryEventsContextToken"/>.</para>
     /// </summary>
     [PublicAPI]
     public class ServiceDiscoveryEvent

@@ -1,21 +1,20 @@
 ﻿using System;
 using JetBrains.Annotations;
 using Vostok.ServiceDiscovery.Telemetry.Event;
-using Vostok.ServiceDiscovery.Telemetry.EventContext;
 
 namespace Vostok.ServiceDiscovery.Telemetry.EventsBuilder
 {
     /// <summary>
     /// <para><see cref="IServiceDiscoveryEventsBuilder"/> purpose is to facilitate easy phased construction of <see cref="ServiceDiscoveryEvent"/>s in applications.</para>
-    /// <para>Its state (from setup in <see cref="ServiceDiscoveryEventContextToken"/> to <see cref="ServiceDiscoveryEventContextToken.Dispose"/>)
-    /// is closely related to <see cref="IServiceDiscoveryEventContext.CurrentEvents"/>.</para>
+    /// <para>Its state (from setup in <see cref="ServiceDiscoveryEventsContextToken"/> to <see cref="ServiceDiscoveryEventsContextToken.Dispose"/>)
+    /// is closely related to <see cref="IServiceDiscoveryEventsContext.CurrentEvents"/>.</para>
     /// <para><see cref="ServiceDiscoveryEvent"/>s are primarily intended to display the history of operations on a replica,
     /// and we have built in sending events to the IServiceDiscoveryManager, so
     /// typical usage of <see cref="IServiceDiscoveryEventsBuilder"/> boils down to this:</para>
     /// <list type="number">
-    ///     <item><description>Setup <see cref="IServiceDiscoveryEventsBuilder"/> in <see cref="ServiceDiscoveryEventContextToken"/>.</description></item>
+    ///     <item><description>Setup <see cref="IServiceDiscoveryEventsBuilder"/> in <see cref="ServiceDiscoveryEventsContextToken"/>.</description></item>
     ///     <item><description>Perform the desired operation with IServiceDiscoveryManager.</description></item>
-    ///     <item><description><see cref="ServiceDiscoveryEventContextToken.Dispose"/> of the token.</description></item>
+    ///     <item><description><see cref="ServiceDiscoveryEventsContextToken.Dispose"/> of the token.</description></item>
     /// </list>
     /// <code>
     ///     using (new ServiceDiscoveryEventContextToken(builder =>
