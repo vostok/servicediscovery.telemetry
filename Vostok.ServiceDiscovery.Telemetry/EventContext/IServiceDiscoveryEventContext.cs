@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 using Vostok.ServiceDiscovery.Telemetry.Event;
 using Vostok.ServiceDiscovery.Telemetry.EventsBuilder;
 
-namespace Vostok.ServiceDiscovery.Telemetry.EventContext
+namespace Vostok.ServiceDiscovery.Telemetry.EventsContext
 {
     /// <summary>
     /// <see cref="IServiceDiscoveryEventContext"/> is the main point of sending servicediscovery telemetry.
