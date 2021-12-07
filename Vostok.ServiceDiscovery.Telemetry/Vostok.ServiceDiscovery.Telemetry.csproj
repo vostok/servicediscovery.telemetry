@@ -1,23 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-  
   <Import Project="..\..\vostok.devtools\library-common-props\Main-Project.props" />
   <Import Project="..\..\vostok.devtools\git-commit-to-assembly-title\Vostok.Tools.GitCommit2AssemblyTitle.props" />
-
   <PropertyGroup>
     <Configurations>Debug;Release</Configurations>
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
-
   <PropertyGroup>
-    <VersionPrefix>0.0.1</VersionPrefix>
+    <VersionPrefix>0.1.0</VersionPrefix>
   </PropertyGroup>
-
   <PropertyGroup>
     <Title>Vostok.ServiceDiscovery.Telemetry</Title>
-    <Description></Description>
+    <Description>
+    </Description>
   </PropertyGroup>
-
   <PropertyGroup>
     <PackageProjectUrl>https://github.com/vostok/servicediscovery.telemetry</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/vostok/servicediscovery.telemetry/blob/master/LICENSE</PackageLicenseUrl>
@@ -25,5 +21,10 @@
     <PackageReleaseNotes>https://github.com/vostok/servicediscovery.telemetry/blob/master/CHANGELOG.md</PackageReleaseNotes>
     <RepositoryUrl>https://github.com/vostok/servicediscovery.telemetry</RepositoryUrl>
   </PropertyGroup>
-  
+  <ItemGroup>
+    <Reference Include="Vostok.Context">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\vostok.context\Vostok.Context\bin\Release\$(ReferencesFramework)\Vostok.Context.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>
