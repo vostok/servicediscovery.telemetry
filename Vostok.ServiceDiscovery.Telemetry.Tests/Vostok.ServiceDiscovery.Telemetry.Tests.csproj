@@ -18,4 +18,10 @@
     <ProjectReference Include="..\Vostok.ServiceDiscovery.Telemetry\Vostok.ServiceDiscovery.Telemetry.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Vostok.Context">
+      <HintPath>..\..\vostok.context\Vostok.Context\bin\Release\$(ReferencesFramework)\Vostok.Context.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
