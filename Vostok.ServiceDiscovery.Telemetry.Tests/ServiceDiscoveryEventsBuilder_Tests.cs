@@ -58,9 +58,9 @@ namespace Vostok.ServiceDiscovery.Telemetry.Tests
             eventsBuilder.BuildEvents().Should().BeEmpty();
         }
 
-        private static IServiceDiscoveryEventsBuilder SetupBuilder(IServiceDiscoveryEventsBuilder description)
+        private static IServiceDiscoveryEventsBuilder SetupBuilder(IServiceDiscoveryEventsBuilder eventsBuilder)
         {
-            return description.SetApplication(Application)
+            return eventsBuilder.SetApplication(Application)
                 .SetEnvironment(Environment)
                 .SetKind(ServiceDiscoveryEventKind.ReplicaStarted);
         }
