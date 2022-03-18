@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using JetBrains.Annotations;
 
 namespace Vostok.ServiceDiscovery.Telemetry
@@ -34,10 +35,27 @@ namespace Vostok.ServiceDiscovery.Telemetry
         /// <exception cref="InvalidOperationException">Attempted to overwrite previously configured instance.</exception>
         public static void Configure([NotNull] IServiceDiscoveryEventsContext serviceDiscoveryEventsContext, bool canOverwrite = false)
         {
-            if (!canOverwrite && instance != null)
-                throw new InvalidOperationException($"Can't overwrite existing configured implementation of type '{instance.GetType().Name}'.");
+            if (!TryConfigure(serviceDiscoveryEventsContext, canOverwrite))
+                throw new InvalidOperationException($"Can't overwrite existing configured Hercules sink implementation of type '{instance.GetType().Name}'.");
+        }
 
-            instance = serviceDiscoveryEventsContext ?? throw new ArgumentNullException(nameof(serviceDiscoveryEventsContext));
+        /// <summary>
+        /// <para>Configures the global default <see cref="IServiceDiscoveryEventsContext"/> with given instance, which will be returned by all subsequent <see cref="Get"/> calls.</para>
+        /// <para>By default, this method returns <c>false</c> when trying to overwrite a previously configured instance. This behaviour can be changed with <paramref name="canOverwrite"/> parameter.</para>
+        /// </summary>
+        /// <exception cref="ArgumentNullException">Provided instance was <c>null</c>.</exception>
+        public static bool TryConfigure([NotNull] IServiceDiscoveryEventsContext serviceDiscoveryEventsContext, bool canOverwrite = false)
+        {
+            if (serviceDiscoveryEventsContext == null)
+                throw new ArgumentNullException(nameof(serviceDiscoveryEventsContext));
+
+            if (canOverwrite)
+            {
+                Interlocked.Exchange(ref instance, serviceDiscoveryEventsContext);
+                return true;
+            }
+
+            return Interlocked.CompareExchange(ref instance, serviceDiscoveryEventsContext, null) == null;
         }
     }
 }
