@@ -36,7 +36,7 @@ namespace Vostok.ServiceDiscovery.Telemetry
         public static void Configure([NotNull] IServiceDiscoveryEventsContext serviceDiscoveryEventsContext, bool canOverwrite = false)
         {
             if (!TryConfigure(serviceDiscoveryEventsContext, canOverwrite))
-                throw new InvalidOperationException($"Can't overwrite existing configured Hercules sink implementation of type '{instance.GetType().Name}'.");
+                throw new InvalidOperationException($"Can't overwrite existing configured implementation of type '{instance.GetType().Name}'.");
         }
 
         /// <summary>
