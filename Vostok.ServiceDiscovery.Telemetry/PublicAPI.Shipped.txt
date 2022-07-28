@@ -1,0 +1,60 @@
+const Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEventWellKnownProperties.Dependencies = "dependencies" -> string
+const Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEventWellKnownProperties.Description = "description" -> string
+const Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEventWellKnownProperties.UserId = "userId" -> string
+static Vostok.ServiceDiscovery.Telemetry.EventsBuilder.IServiceDiscoveryEventsBuilderExtensions.SetDependencies(this Vostok.ServiceDiscovery.Telemetry.EventsBuilder.IServiceDiscoveryEventsBuilder serviceDiscoveryEventsBuilder, string dependencies) -> Vostok.ServiceDiscovery.Telemetry.EventsBuilder.IServiceDiscoveryEventsBuilder
+static Vostok.ServiceDiscovery.Telemetry.EventsBuilder.IServiceDiscoveryEventsBuilderExtensions.SetDescription(this Vostok.ServiceDiscovery.Telemetry.EventsBuilder.IServiceDiscoveryEventsBuilder serviceDiscoveryEventsBuilder, string description) -> Vostok.ServiceDiscovery.Telemetry.EventsBuilder.IServiceDiscoveryEventsBuilder
+static Vostok.ServiceDiscovery.Telemetry.EventsBuilder.IServiceDiscoveryEventsBuilderExtensions.SetUserId(this Vostok.ServiceDiscovery.Telemetry.EventsBuilder.IServiceDiscoveryEventsBuilder serviceDiscoveryEventsBuilder, string userId) -> Vostok.ServiceDiscovery.Telemetry.EventsBuilder.IServiceDiscoveryEventsBuilder
+static Vostok.ServiceDiscovery.Telemetry.EventsSender.IServiceDiscoveryEventsSenderExtensions.Send(this Vostok.ServiceDiscovery.Telemetry.EventsSender.IServiceDiscoveryEventsSender eventsSender, System.Collections.Generic.IEnumerable<Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEvent> events) -> void
+static Vostok.ServiceDiscovery.Telemetry.ServiceDiscoveryEventsContextProvider.Configure(Vostok.ServiceDiscovery.Telemetry.IServiceDiscoveryEventsContext serviceDiscoveryEventsContext, bool canOverwrite = false) -> void
+static Vostok.ServiceDiscovery.Telemetry.ServiceDiscoveryEventsContextProvider.Get() -> Vostok.ServiceDiscovery.Telemetry.IServiceDiscoveryEventsContext
+static Vostok.ServiceDiscovery.Telemetry.ServiceDiscoveryEventsContextProvider.IsConfigured.get -> bool
+static Vostok.ServiceDiscovery.Telemetry.ServiceDiscoveryEventsContextProvider.TryConfigure(Vostok.ServiceDiscovery.Telemetry.IServiceDiscoveryEventsContext serviceDiscoveryEventsContext, bool canOverwrite = false) -> bool
+Vostok.ServiceDiscovery.Telemetry.DevNullServiceDiscoveryEventsContext
+Vostok.ServiceDiscovery.Telemetry.DevNullServiceDiscoveryEventsContext.CurrentEvents.get -> System.Collections.Generic.IEnumerable<Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEvent>
+Vostok.ServiceDiscovery.Telemetry.DevNullServiceDiscoveryEventsContext.DevNullServiceDiscoveryEventsContext() -> void
+Vostok.ServiceDiscovery.Telemetry.DevNullServiceDiscoveryEventsContext.Send(Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEvent event) -> void
+Vostok.ServiceDiscovery.Telemetry.DevNullServiceDiscoveryEventsContext.SendFromContext() -> void
+Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEvent
+Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEvent.Application.get -> string
+Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEvent.Environment.get -> string
+Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEvent.Kind.get -> Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEventKind
+Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEvent.Properties.get -> System.Collections.Generic.IReadOnlyDictionary<string, string>
+Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEvent.Replica.get -> string
+Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEvent.ServiceDiscoveryEvent(Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEventKind kind, string environment, string application, string replica, System.DateTimeOffset timestamp, System.Collections.Generic.IReadOnlyDictionary<string, string> properties) -> void
+Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEvent.Timestamp.get -> System.DateTimeOffset
+Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEventKind
+Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEventKind.ReplicaAddedToBlackList = 2 -> Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEventKind
+Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEventKind.ReplicaRemovedFromBlacklist = 3 -> Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEventKind
+Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEventKind.ReplicaStarted = 0 -> Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEventKind
+Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEventKind.ReplicaStopped = 1 -> Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEventKind
+Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEventWellKnownProperties
+Vostok.ServiceDiscovery.Telemetry.EventsBuilder.IServiceDiscoveryEventsBuilder
+Vostok.ServiceDiscovery.Telemetry.EventsBuilder.IServiceDiscoveryEventsBuilder.AddReplicas(params string[] replicas) -> Vostok.ServiceDiscovery.Telemetry.EventsBuilder.IServiceDiscoveryEventsBuilder
+Vostok.ServiceDiscovery.Telemetry.EventsBuilder.IServiceDiscoveryEventsBuilder.SetApplication(string application) -> Vostok.ServiceDiscovery.Telemetry.EventsBuilder.IServiceDiscoveryEventsBuilder
+Vostok.ServiceDiscovery.Telemetry.EventsBuilder.IServiceDiscoveryEventsBuilder.SetEnvironment(string environment) -> Vostok.ServiceDiscovery.Telemetry.EventsBuilder.IServiceDiscoveryEventsBuilder
+Vostok.ServiceDiscovery.Telemetry.EventsBuilder.IServiceDiscoveryEventsBuilder.SetKind(Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEventKind kind) -> Vostok.ServiceDiscovery.Telemetry.EventsBuilder.IServiceDiscoveryEventsBuilder
+Vostok.ServiceDiscovery.Telemetry.EventsBuilder.IServiceDiscoveryEventsBuilder.SetProperty(string key, string value) -> Vostok.ServiceDiscovery.Telemetry.EventsBuilder.IServiceDiscoveryEventsBuilder
+Vostok.ServiceDiscovery.Telemetry.EventsBuilder.IServiceDiscoveryEventsBuilder.SetTimestamp(System.DateTimeOffset timestamp) -> Vostok.ServiceDiscovery.Telemetry.EventsBuilder.IServiceDiscoveryEventsBuilder
+Vostok.ServiceDiscovery.Telemetry.EventsBuilder.IServiceDiscoveryEventsBuilderExtensions
+Vostok.ServiceDiscovery.Telemetry.EventsSender.DevNullServiceDiscoveryEventsSender
+Vostok.ServiceDiscovery.Telemetry.EventsSender.DevNullServiceDiscoveryEventsSender.DevNullServiceDiscoveryEventsSender() -> void
+Vostok.ServiceDiscovery.Telemetry.EventsSender.DevNullServiceDiscoveryEventsSender.Send(Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEvent event) -> void
+Vostok.ServiceDiscovery.Telemetry.EventsSender.IServiceDiscoveryEventsSender
+Vostok.ServiceDiscovery.Telemetry.EventsSender.IServiceDiscoveryEventsSender.Send(Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEvent event) -> void
+Vostok.ServiceDiscovery.Telemetry.EventsSender.IServiceDiscoveryEventsSenderExtensions
+Vostok.ServiceDiscovery.Telemetry.IServiceDiscoveryEventsContext
+Vostok.ServiceDiscovery.Telemetry.IServiceDiscoveryEventsContext.CurrentEvents.get -> System.Collections.Generic.IEnumerable<Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEvent>
+Vostok.ServiceDiscovery.Telemetry.IServiceDiscoveryEventsContext.Send(Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEvent event) -> void
+Vostok.ServiceDiscovery.Telemetry.IServiceDiscoveryEventsContext.SendFromContext() -> void
+Vostok.ServiceDiscovery.Telemetry.ServiceDiscoveryEventsContext
+Vostok.ServiceDiscovery.Telemetry.ServiceDiscoveryEventsContext.CurrentEvents.get -> System.Collections.Generic.IEnumerable<Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEvent>
+Vostok.ServiceDiscovery.Telemetry.ServiceDiscoveryEventsContext.Send(Vostok.ServiceDiscovery.Telemetry.Event.ServiceDiscoveryEvent event) -> void
+Vostok.ServiceDiscovery.Telemetry.ServiceDiscoveryEventsContext.SendFromContext() -> void
+Vostok.ServiceDiscovery.Telemetry.ServiceDiscoveryEventsContext.ServiceDiscoveryEventsContext(Vostok.ServiceDiscovery.Telemetry.ServiceDiscoveryEventsContextConfig config) -> void
+Vostok.ServiceDiscovery.Telemetry.ServiceDiscoveryEventsContextConfig
+Vostok.ServiceDiscovery.Telemetry.ServiceDiscoveryEventsContextConfig.Sender.get -> Vostok.ServiceDiscovery.Telemetry.EventsSender.IServiceDiscoveryEventsSender
+Vostok.ServiceDiscovery.Telemetry.ServiceDiscoveryEventsContextConfig.ServiceDiscoveryEventsContextConfig(Vostok.ServiceDiscovery.Telemetry.EventsSender.IServiceDiscoveryEventsSender sender) -> void
+Vostok.ServiceDiscovery.Telemetry.ServiceDiscoveryEventsContextProvider
+Vostok.ServiceDiscovery.Telemetry.ServiceDiscoveryEventsContextToken
+Vostok.ServiceDiscovery.Telemetry.ServiceDiscoveryEventsContextToken.Dispose() -> void
+Vostok.ServiceDiscovery.Telemetry.ServiceDiscoveryEventsContextToken.ServiceDiscoveryEventsContextToken(System.Action<Vostok.ServiceDiscovery.Telemetry.EventsBuilder.IServiceDiscoveryEventsBuilder> setup) -> void
