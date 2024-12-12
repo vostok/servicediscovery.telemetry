@@ -1,3 +1,7 @@
+## 0.1.4 (12-12-2024): 
+
+Bump NuGet deps versions
+
 ## 0.1.3 (18-03-2022):
 
 Added `TryConfigure` to context provider.
