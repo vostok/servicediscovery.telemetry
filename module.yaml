@@ -2,7 +2,7 @@ notests *default:
   deps:
     - vostok.context
     - vostok.devtools
-    
+
   build:
     target: Vostok.ServiceDiscovery.Telemetry.sln
     configuration: NoTests
@@ -11,6 +11,16 @@ notests *default:
 
   install:
     - Vostok.ServiceDiscovery.Telemetry/bin/Release/netstandard2.0/Vostok.ServiceDiscovery.Telemetry.dll
+    - groups:
+        - target-framework: "netstandard2.0"
+          libraries:
+            - Vostok.ServiceDiscovery.Telemetry/bin/Release/netstandard2.0/Vostok.ServiceDiscovery.Telemetry.dll
+        - target-framework: "net6.0"
+          libraries:
+            - Vostok.ServiceDiscovery.Telemetry/bin/Release/net6.0/Vostok.ServiceDiscovery.Telemetry.dll
+        - target-framework: "net8.0"
+          libraries:
+            - Vostok.ServiceDiscovery.Telemetry/bin/Release/net8.0/Vostok.ServiceDiscovery.Telemetry.dll
 
 full-build > notests:
   deps:
